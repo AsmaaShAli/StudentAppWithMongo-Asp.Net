@@ -1,0 +1,84 @@
+﻿@model IEnumerable<WebApplicationMongoDb.Models.Student>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+    <style>
+        .form-control {
+            display: inline-block;
+        }
+    </style>
+
+<h2>List of Students</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm())
+{
+<div>
+    <b>Search by first/last name or email address </b>
+    @Html.TextBox("SearchValue", "",
+   new
+        {
+        @class = "form-control ",
+             @placeholder = "first/last name or email address"
+    })
+
+    <b>Search by age </b>
+
+    @Html.TextBox("SearchAge", "",
+      new
+           {
+           @class = "form-control",
+                @placeholder = "Age..."
+       })
+
+    <input type="submit" value="Search" />
+</div>
+<br />
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.firstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emailAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.firstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.lastName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.emailAddress)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Age)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item._id }) |
+        @Html.ActionLink("Details", "Details", new { id = item._id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item._id })
+    </td>
+</tr>
+    }
+
+</table>
